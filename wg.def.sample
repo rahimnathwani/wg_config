@@ -1,6 +1,8 @@
 _INTERFACE=wg0
 _VPN_NET=192.168.99.0/24
-_SERVER_PORT=51820
-_SERVER_LISTEN=wg.example.com:$_SERVER_PORT
-_SERVER_PUBLIC_KEY=
+_SERVER_PORT=41820
+_SERVER_IP=XX.XX.XX.XX
+_SERVER_LISTEN=$_SERVER_IP:$_SERVER_PORT
 _SERVER_PRIVATE_KEY=
+_SERVER_PUBLIC_KEY=
+# move the keys below to the two lines above this comment, then delete this comment

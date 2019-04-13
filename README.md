@@ -1,38 +1,34 @@
-**This is a part of project:**
-
-https://github.com/adrianmihalko/raspberrypiwireguard
-
-Be sure to read this first.
-
-
-##############################################################################
-
-
-
-
 This is a simple wireguard VPN user management script using on VPN server.
 Client config file and qrcode are generated.
 
+### usage
+Run as `root`
 
-
-### dependency
-
-* wireguard
-* qrencode
+### Install dependencies (wireguard and qrencode)
+```bash
+echo "deb http://deb.debian.org/debian/ unstable main" > /etc/apt/sources.list.d/unstable.list
+printf 'Package: *\nPin: release a=unstable\nPin-Priority: 90\n' > /etc/apt/preferences.d/limit-unstable                       apt update
+apt install wireguard
+apt-get install qrencode
+```
 
 ### config
-The wireguard default config directory is /etc/wireguard.
-The script config file is wg.def, create and edit it according to wg.def.sample.
-You can generate the public key and private key with command `wg genkey | tee > prikey | wg pubkey > pubkey`.
-
-### usage
-
-Running as root.
+```bash
+touch /etc/wireguard/wg0.conf
+git clone https://github.com/rahimnathwani/wg_config.git
+cd wg_config
+cp wg.def.sample wg.def
+wg genkey | tee >> wg.def | wg pubkey >> wg.def
+nano wg.def
+```
+move the private and public keys into the right place and delete the comment
 
 #### start wireguard
 
 ```bash
-wg-quick up wg0
+systemctl enable wg-quick@wg0.service
+systemctl stop wg-quick@wg0.service
+systemctl start wg-quick@wg0.service
 ```
 
 #### add a user
@@ -41,7 +37,7 @@ wg-quick up wg0
 ./user.sh -a alice
 ```
 
-This will generate a client conf and qrcode in current directory which name is alice
+This will generate a client conf and qrcode in current directory whose name is alice
 and add alice to the wg config.
 
 #### delete a user
@@ -57,7 +53,6 @@ This will delete the alice directory and delete alice from the wg config.
 ./user.sh -v alice
 ```
 This will show generated QR codes.
-
 
 #### clear all
 

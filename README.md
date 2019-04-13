@@ -19,6 +19,8 @@ git clone https://github.com/rahimnathwani/wg_config.git
 cd wg_config
 cp wg.def.sample wg.def
 wg genkey | tee -a wg.def | wg pubkey >> wg.def
+echo _SERVER_PRIVATE_KEY=`wg genkey | tee server_private_key` >> wg.def
+echo _SERVER_PUBLIC_KEY=`cat server_private_key|wg pubkey` >> wg.def
 nano wg.def
 ```
 move the private and public keys into the right place and delete the comment

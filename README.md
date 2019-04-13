@@ -23,8 +23,7 @@ echo _SERVER_PRIVATE_KEY=`wg genkey | tee server_private_key` >> wg.def
 echo _SERVER_PUBLIC_KEY=`cat server_private_key|wg pubkey` >> wg.def
 nano wg.def
 ```
-move the private and public keys into the right place and delete the comment
-
+Put the server's public IP address in wg.def
 #### start wireguard
 
 ```bash

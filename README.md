@@ -18,7 +18,7 @@ touch /etc/wireguard/wg0.conf
 git clone https://github.com/rahimnathwani/wg_config.git
 cd wg_config
 cp wg.def.sample wg.def
-wg genkey | tee >> wg.def | wg pubkey >> wg.def
+wg genkey | tee -a wg.def | wg pubkey >> wg.def
 nano wg.def
 ```
 move the private and public keys into the right place and delete the comment
